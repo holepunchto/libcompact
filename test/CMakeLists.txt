@@ -1,5 +1,7 @@
 list(APPEND tests
   array-utf8
+  fixed32
+  fixed64
 )
 
 foreach(test IN LISTS tests)
