@@ -43,8 +43,8 @@ compact_decode_array (compact_state_t *state, void **result, size_t *len, void *
 
   void *array = on_alloc(size, data);
 
-  *result = array;
-  *len = 0;
+  if (result) *result = array;
+  if (len) *len = 0;
 
   for (size_t i = 0; i < size; i++) {
     err = on_decode(state, array, i, data);

@@ -19,6 +19,7 @@ compact_decode_intmax (compact_state_t *state, intmax_t *result) {
   int err = compact_decode_uint(state, &n);
   if (err < 0) return err;
 
-  *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(n);
+
   return 0;
 }

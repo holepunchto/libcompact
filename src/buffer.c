@@ -33,9 +33,11 @@ compact_decode_buffer (compact_state_t *state, uint8_t **result, size_t *len) {
 
   if (state->end - state->start < size) return -1;
 
-  *result = malloc(size);
-  memcpy(*result, &state->buffer[state->start], size);
+  uint8_t *buffer = malloc(size);
 
+  memcpy(buffer, &state->buffer[state->start], size);
+
+  if (result) *result = buffer;
   if (len) *len = size;
 
   state->start += size;

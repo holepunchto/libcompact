@@ -18,6 +18,10 @@ compact_encode_uint16 (compact_state_t *state, uint16_t n) {
 int
 compact_decode_uint16 (compact_state_t *state, uint16_t *result) {
   if (state->end - state->start < 2) return -1;
-  *result = state->buffer[state->start++] + state->buffer[state->start++] * 0x100;
+
+  uint16_t n = state->buffer[state->start++] + state->buffer[state->start++] * 0x100;
+
+  if (result) *result = n;
+
   return 0;
 }

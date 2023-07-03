@@ -17,6 +17,10 @@ compact_encode_uint8 (compact_state_t *state, uint8_t n) {
 int
 compact_decode_uint8 (compact_state_t *state, uint8_t *result) {
   if (state->start >= state->end) return -1;
-  *result = state->buffer[state->start++];
+
+  uint8_t n = state->buffer[state->start++];
+
+  if (result) *result = n;
+
   return 0;
 }

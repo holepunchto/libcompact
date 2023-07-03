@@ -20,6 +20,7 @@ compact_decode_int8 (compact_state_t *state, int8_t *result) {
   int err = compact_decode_uint8(state, &n);
   if (err < 0) return err;
 
-  *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(n);
+
   return 0;
 }

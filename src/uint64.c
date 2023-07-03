@@ -24,6 +24,10 @@ compact_encode_uint64 (compact_state_t *state, uint64_t n) {
 int
 compact_decode_uint64 (compact_state_t *state, uint64_t *result) {
   if (state->end - state->start < 2) return -1;
-  *result = state->buffer[state->start++] + state->buffer[state->start++] * 0x100 + state->buffer[state->start++] * 0x10000 + state->buffer[state->start++] * 0x1000000 + state->buffer[state->start++] * 0x100000000 + state->buffer[state->start++] * 0x10000000000 + state->buffer[state->start++] * 0x1000000000000 + state->buffer[state->start++] * 0x100000000000000;
+
+  uint64_t n = state->buffer[state->start++] + state->buffer[state->start++] * 0x100 + state->buffer[state->start++] * 0x10000 + state->buffer[state->start++] * 0x1000000 + state->buffer[state->start++] * 0x100000000 + state->buffer[state->start++] * 0x10000000000 + state->buffer[state->start++] * 0x1000000000000 + state->buffer[state->start++] * 0x100000000000000;
+
+  if (result) *result = n;
+
   return 0;
 }

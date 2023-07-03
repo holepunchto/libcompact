@@ -20,6 +20,7 @@ compact_decode_int16 (compact_state_t *state, int16_t *result) {
   int err = compact_decode_uint16(state, &n);
   if (err < 0) return err;
 
-  *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(n);
+
   return 0;
 }

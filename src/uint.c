@@ -40,7 +40,8 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
   if (err < 0) return err;
 
   if (uint8 <= 0xfc) {
-    *result = uint8;
+    if (result) *result = uint8;
+
     return 0;
   }
 
@@ -49,7 +50,8 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
     err = compact_decode_uint16(state, &uint16);
     if (err < 0) return err;
 
-    *result = uint16;
+    if (result) *result = uint16;
+
     return 0;
   }
 
@@ -58,7 +60,8 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
     err = compact_decode_uint32(state, &uint32);
     if (err < 0) return err;
 
-    *result = uint32;
+    if (result) *result = uint32;
+
     return 0;
   }
 
@@ -66,6 +69,7 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
   err = compact_decode_uint64(state, &uint64);
   if (err < 0) return err;
 
-  *result = uint64;
+  if (result) *result = uint64;
+
   return 0;
 }
