@@ -121,6 +121,15 @@ int
 compact_decode_int64 (compact_state_t *state, int64_t *result);
 
 int
+compact_preencode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len);
+
+int
+compact_encode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len);
+
+int
+compact_decode_buffer (compact_state_t *state, uint8_t **result, size_t *len);
+
+int
 compact_preencode_fixed32 (compact_state_t *state, const uint8_t buffer[32]);
 
 int

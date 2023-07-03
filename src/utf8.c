@@ -35,8 +35,11 @@ compact_decode_utf8 (compact_state_t *state, utf8_t **result, size_t *len) {
   if (err < 0) return err;
 
   if (state->end - state->start < size) return -1;
+
   *result = (utf8_t *) strndup((const char *) &state->buffer[state->start], size);
-  state->start += size;
+
   if (len) *len = size;
+
+  state->start += size;
   return 0;
 }

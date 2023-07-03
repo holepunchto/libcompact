@@ -49,6 +49,7 @@ compact_decode_array (compact_state_t *state, void **result, size_t *len, void *
   for (size_t i = 0; i < size; i++) {
     err = on_decode(state, array, i, data);
     if (err < 0) return err;
+
     if (len) *len += 1;
   }
 
