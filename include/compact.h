@@ -1,5 +1,5 @@
-#ifndef HEX_H
-#define HEX_H
+#ifndef COMPACT_H
+#define COMPACT_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -160,4 +160,4 @@ compact_decode_array (compact_state_t *state, void **result, size_t *len, void *
 }
 #endif
 
-#endif // HEX_H
+#endif // COMPACT_H
