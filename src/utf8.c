@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 #include <utf.h>
 
@@ -36,9 +37,16 @@ compact_decode_utf8 (compact_state_t *state, utf8_t **result, size_t *len) {
 
   if (state->end - state->start < size) return -1;
 
-  utf8_t *string = (utf8_t *) strndup((char *) &state->buffer[state->start], size);
+  if (result) {
+    utf8_t *string = malloc(size + 1 /* NULL */);
 
-  if (result) *result = string;
+    string[size] = '\0';
+
+    memcpy(string, &state->buffer[state->start], size);
+
+    *result = string;
+  }
+
   if (len) *len = size;
 
   state->start += size;
