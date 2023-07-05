@@ -11,7 +11,6 @@ compact_preencode_uint64 (compact_state_t *state, uint64_t n) {
 
 int
 compact_encode_uint64 (compact_state_t *state, uint64_t n) {
-
   state->buffer[state->start] = n;
   state->buffer[state->start + 1] = n >> 8;
   state->buffer[state->start + 2] = n >> 16;

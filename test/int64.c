@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../include/compact.h"
@@ -24,7 +23,6 @@
     int64_t decoded; \
     err = compact_decode_int64(&state, &decoded); \
     assert(err == 0); \
-    printf("decoded=%lld\n", decoded); \
 \
     assert(n == decoded); \
   }

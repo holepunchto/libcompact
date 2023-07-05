@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <stdio.h>
 
 #include "../include/compact.h"
 #include "zig-zag.h"
@@ -21,8 +20,6 @@ compact_decode_int64 (compact_state_t *state, int64_t *result) {
   uint64_t n;
   int err = compact_decode_uint64(state, result ? &n : NULL);
   if (err < 0) return err;
-
-  printf("n=%llu\n", n);
 
   if (result) *result = compact_decode_zig_zag(64, n);
 
