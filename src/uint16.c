@@ -12,7 +12,7 @@ compact_preencode_uint16 (compact_state_t *state, uint16_t n) {
 int
 compact_encode_uint16 (compact_state_t *state, uint16_t n) {
   state->buffer[state->start] = n;
-  state->buffer[state->start + 2] = n >> 8;
+  state->buffer[state->start + 1] = n >> 8;
 
   state->start += 2;
 
