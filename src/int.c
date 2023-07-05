@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 
 #include "../include/compact.h"
@@ -5,21 +6,27 @@
 
 int
 compact_preencode_int (compact_state_t *state, intmax_t n) {
-  return compact_preencode_uint(state, compact_encode_zig_zag(n));
+  assert(sizeof(intmax_t) == 64);
+
+  return compact_preencode_uint(state, compact_encode_zig_zag(64, n));
 }
 
 int
 compact_encode_int (compact_state_t *state, intmax_t n) {
-  return compact_encode_uint(state, compact_encode_zig_zag(n));
+  assert(sizeof(intmax_t) == 64);
+
+  return compact_encode_uint(state, compact_encode_zig_zag(64, n));
 }
 
 int
-compact_decode_intmax (compact_state_t *state, intmax_t *result) {
+compact_decode_int (compact_state_t *state, intmax_t *result) {
+  assert(sizeof(intmax_t) == 64);
+
   uintmax_t n;
   int err = compact_decode_uint(state, result ? &n : NULL);
   if (err < 0) return err;
 
-  if (result) *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(64, n);
 
   return 0;
 }

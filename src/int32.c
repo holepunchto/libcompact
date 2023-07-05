@@ -12,7 +12,7 @@ compact_preencode_int32 (compact_state_t *state, int32_t n) {
 
 int
 compact_encode_int32 (compact_state_t *state, int32_t n) {
-  return compact_encode_uint32(state, compact_encode_zig_zag(n));
+  return compact_encode_uint32(state, compact_encode_zig_zag(32, n));
 }
 
 int
@@ -21,7 +21,7 @@ compact_decode_int32 (compact_state_t *state, int32_t *result) {
   int err = compact_decode_uint32(state, result ? &n : NULL);
   if (err < 0) return err;
 
-  if (result) *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(32, n);
 
   return 0;
 }

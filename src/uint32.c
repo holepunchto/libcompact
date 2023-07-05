@@ -25,7 +25,7 @@ int
 compact_decode_uint32 (compact_state_t *state, uint32_t *result) {
   if (state->end - state->start < 4) return -1;
 
-  if (result) *result = state->buffer[state->start] + state->buffer[state->start + 1] * 0x100 + state->buffer[state->start + 2] * 0x10000 + state->buffer[state->start + 3] * 0x1000000;
+  if (result) *result = ((uint32_t) state->buffer[state->start]) | ((uint32_t) state->buffer[state->start + 1] << 8) | ((uint32_t) state->buffer[state->start + 2] << 16) | ((uint32_t) state->buffer[state->start + 3] << 24);
 
   state->start += 4;
 

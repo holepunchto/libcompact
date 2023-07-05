@@ -23,7 +23,7 @@ int
 compact_decode_uint16 (compact_state_t *state, uint16_t *result) {
   if (state->end - state->start < 2) return -1;
 
-  if (result) *result = state->buffer[state->start] + state->buffer[state->start + 1] * 0x100;
+  if (result) *result = ((uint16_t) state->buffer[state->start]) | ((uint16_t) state->buffer[state->start + 1] << 8);
 
   state->start += 2;
 

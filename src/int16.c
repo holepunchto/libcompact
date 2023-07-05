@@ -12,7 +12,7 @@ compact_preencode_int16 (compact_state_t *state, int16_t n) {
 
 int
 compact_encode_int16 (compact_state_t *state, int16_t n) {
-  return compact_encode_uint16(state, compact_encode_zig_zag(n));
+  return compact_encode_uint16(state, compact_encode_zig_zag(16, n));
 }
 
 int
@@ -21,7 +21,7 @@ compact_decode_int16 (compact_state_t *state, int16_t *result) {
   int err = compact_decode_uint16(state, result ? &n : NULL);
   if (err < 0) return err;
 
-  if (result) *result = compact_decode_zig_zag(n);
+  if (result) *result = compact_decode_zig_zag(16, n);
 
   return 0;
 }

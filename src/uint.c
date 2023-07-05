@@ -1,9 +1,12 @@
+#include <assert.h>
 #include <stdint.h>
 
 #include "../include/compact.h"
 
 int
 compact_preencode_uint (compact_state_t *state, uintmax_t n) {
+  assert(sizeof(uintmax_t) == 8);
+
   state->end += n <= 0xfc         ? 1
                 : n <= 0xffff     ? 3
                 : n <= 0xffffffff ? 5
@@ -13,6 +16,8 @@ compact_preencode_uint (compact_state_t *state, uintmax_t n) {
 
 int
 compact_encode_uint (compact_state_t *state, uintmax_t n) {
+  assert(sizeof(uintmax_t) == 8);
+
   if (n <= 0xfc) {
     return compact_encode_uint8(state, n & 0xff);
   }
@@ -36,6 +41,8 @@ compact_encode_uint (compact_state_t *state, uintmax_t n) {
 
 int
 compact_decode_uint (compact_state_t *state, uintmax_t *result) {
+  assert(sizeof(uintmax_t) == 8);
+
   int err;
 
   uint8_t uint8;
