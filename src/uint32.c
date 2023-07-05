@@ -4,7 +4,7 @@
 
 int
 compact_preencode_uint32 (compact_state_t *state, uint32_t n) {
-  state->end += 2;
+  state->end += 4;
   return 0;
 }
 
@@ -19,7 +19,7 @@ compact_encode_uint32 (compact_state_t *state, uint32_t n) {
 
 int
 compact_decode_uint32 (compact_state_t *state, uint32_t *result) {
-  if (state->end - state->start < 2) return -1;
+  if (state->end - state->start < 4) return -1;
 
   uint32_t n = state->buffer[state->start++] + state->buffer[state->start++] * 0x100 + state->buffer[state->start++] * 0x10000 + state->buffer[state->start++] * 0x1000000;
 
