@@ -16,7 +16,7 @@ compact_encode_int (compact_state_t *state, intmax_t n) {
 int
 compact_decode_intmax (compact_state_t *state, intmax_t *result) {
   uintmax_t n;
-  int err = compact_decode_uint(state, &n);
+  int err = compact_decode_uint(state, result ? &n : NULL);
   if (err < 0) return err;
 
   if (result) *result = compact_decode_zig_zag(n);

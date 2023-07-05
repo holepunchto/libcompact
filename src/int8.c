@@ -6,6 +6,7 @@
 int
 compact_preencode_int8 (compact_state_t *state, int8_t n) {
   state->end++;
+
   return 0;
 }
 
@@ -17,7 +18,7 @@ compact_encode_int8 (compact_state_t *state, int8_t n) {
 int
 compact_decode_int8 (compact_state_t *state, int8_t *result) {
   uint8_t n;
-  int err = compact_decode_uint8(state, &n);
+  int err = compact_decode_uint8(state, result ? &n : NULL);
   if (err < 0) return err;
 
   if (result) *result = compact_decode_zig_zag(n);

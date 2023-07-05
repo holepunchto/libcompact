@@ -19,15 +19,18 @@ compact_encode_uint (compact_state_t *state, uintmax_t n) {
 
   if (n <= 0xffff) {
     state->buffer[state->start++] = 0xfd;
+
     return compact_encode_uint16(state, n & 0xffff);
   }
 
   if (n <= 0xffffffff) {
     state->buffer[state->start++] = 0xfe;
+
     return compact_encode_uint32(state, n & 0xffffffff);
   }
 
   state->buffer[state->start++] = 0xff;
+
   return compact_encode_uint64(state, n);
 }
 
@@ -47,7 +50,7 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
 
   if (uint8 == 0xfd) {
     uint16_t uint16;
-    err = compact_decode_uint16(state, &uint16);
+    err = compact_decode_uint16(state, result ? &uint16 : NULL);
     if (err < 0) return err;
 
     if (result) *result = uint16;
@@ -57,7 +60,7 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
 
   if (uint8 == 0xfe) {
     uint32_t uint32;
-    err = compact_decode_uint32(state, &uint32);
+    err = compact_decode_uint32(state, result ? &uint32 : NULL);
     if (err < 0) return err;
 
     if (result) *result = uint32;
@@ -66,7 +69,7 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
   }
 
   uint64_t uint64;
-  err = compact_decode_uint64(state, &uint64);
+  err = compact_decode_uint64(state, result ? &uint64 : NULL);
   if (err < 0) return err;
 
   if (result) *result = uint64;

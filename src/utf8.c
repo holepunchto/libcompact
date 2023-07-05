@@ -13,6 +13,7 @@ compact_preencode_utf8 (compact_state_t *state, const utf8_t *string, size_t len
   if (err < 0) return 0;
 
   state->end += len;
+
   return 0;
 }
 
@@ -26,6 +27,7 @@ compact_encode_utf8 (compact_state_t *state, const utf8_t *string, size_t len) {
   memcpy(&state->buffer[state->start], string, len);
 
   state->start += len;
+
   return 0;
 }
 
@@ -50,5 +52,6 @@ compact_decode_utf8 (compact_state_t *state, utf8_t **result, size_t *len) {
   if (len) *len = size;
 
   state->start += size;
+
   return 0;
 }

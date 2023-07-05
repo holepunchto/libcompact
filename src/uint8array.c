@@ -11,6 +11,7 @@ compact_preencode_uint8array (compact_state_t *state, const uint8_t *array, size
   if (err < 0) return 0;
 
   state->end += len;
+
   return 0;
 }
 
@@ -22,6 +23,7 @@ compact_encode_uint8array (compact_state_t *state, const uint8_t *array, size_t 
   memcpy(&state->buffer[state->start], array, len);
 
   state->start += len;
+
   return 0;
 }
 
@@ -44,5 +46,6 @@ compact_decode_uint8array (compact_state_t *state, uint8_t **result, size_t *len
   if (len) *len = size;
 
   state->start += size;
+
   return 0;
 }
