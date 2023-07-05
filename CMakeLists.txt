@@ -21,6 +21,7 @@ target_sources(
     include/compact.h
   PRIVATE
     src/array.c
+    src/bool.c
     src/fixed32.c
     src/fixed64.c
     src/float32.c

@@ -1,6 +1,7 @@
 #ifndef COMPACT_H
 #define COMPACT_H
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <utf.h>
@@ -20,6 +21,15 @@ struct compact_state_s {
   size_t end;
   uint8_t *buffer;
 };
+
+int
+compact_preencode_bool (compact_state_t *state, bool value);
+
+int
+compact_encode_bool (compact_state_t *state, bool value);
+
+int
+compact_decode_bool (compact_state_t *state, bool *result);
 
 int
 compact_preencode_uint (compact_state_t *state, uintmax_t n);
