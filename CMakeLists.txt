@@ -21,9 +21,10 @@ target_sources(
     include/compact.h
   PRIVATE
     src/array.c
-    src/buffer.c
     src/fixed32.c
     src/fixed64.c
+    src/float32.c
+    src/float64.c
     src/int.c
     src/int8.c
     src/int16.c
@@ -31,6 +32,7 @@ target_sources(
     src/int64.c
     src/uint.c
     src/uint8.c
+    src/uint8array.c
     src/uint16.c
     src/uint32.c
     src/uint64.c

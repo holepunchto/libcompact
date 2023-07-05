@@ -6,7 +6,7 @@
 #include "../include/compact.h"
 
 int
-compact_preencode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len) {
+compact_preencode_uint8array (compact_state_t *state, const uint8_t *array, size_t len) {
   int err = compact_preencode_uint(state, len);
   if (err < 0) return 0;
 
@@ -15,18 +15,18 @@ compact_preencode_buffer (compact_state_t *state, const uint8_t *buffer, size_t 
 }
 
 int
-compact_encode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len) {
+compact_encode_uint8array (compact_state_t *state, const uint8_t *array, size_t len) {
   int err = compact_encode_uint(state, len);
   if (err < 0) return 0;
 
-  memcpy(&state->buffer[state->start], buffer, len);
+  memcpy(&state->buffer[state->start], array, len);
 
   state->start += len;
   return 0;
 }
 
 int
-compact_decode_buffer (compact_state_t *state, uint8_t **result, size_t *len) {
+compact_decode_uint8array (compact_state_t *state, uint8_t **result, size_t *len) {
   uintmax_t size;
   int err = compact_decode_uint(state, &size);
   if (err < 0) return err;
@@ -34,11 +34,11 @@ compact_decode_buffer (compact_state_t *state, uint8_t **result, size_t *len) {
   if (state->end - state->start < size) return -1;
 
   if (result) {
-    uint8_t *buffer = malloc(size);
+    uint8_t *array = malloc(size);
 
-    memcpy(buffer, &state->buffer[state->start], size);
+    memcpy(array, &state->buffer[state->start], size);
 
-    *result = buffer;
+    *result = array;
   }
 
   if (len) *len = size;

@@ -121,28 +121,46 @@ int
 compact_decode_int64 (compact_state_t *state, int64_t *result);
 
 int
-compact_preencode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len);
+compact_preencode_float32 (compact_state_t *state, float n);
 
 int
-compact_encode_buffer (compact_state_t *state, const uint8_t *buffer, size_t len);
+compact_encode_float32 (compact_state_t *state, float n);
 
 int
-compact_decode_buffer (compact_state_t *state, uint8_t **result, size_t *len);
+compact_decode_float32 (compact_state_t *state, float *result);
 
 int
-compact_preencode_fixed32 (compact_state_t *state, const uint8_t buffer[32]);
+compact_preencode_float64 (compact_state_t *state, double n);
 
 int
-compact_encode_fixed32 (compact_state_t *state, const uint8_t buffer[32]);
+compact_encode_float64 (compact_state_t *state, double n);
+
+int
+compact_decode_float64 (compact_state_t *state, double *result);
+
+int
+compact_preencode_uint8array (compact_state_t *state, const uint8_t *array, size_t len);
+
+int
+compact_encode_uint8array (compact_state_t *state, const uint8_t *array, size_t len);
+
+int
+compact_decode_uint8array (compact_state_t *state, uint8_t **result, size_t *len);
+
+int
+compact_preencode_fixed32 (compact_state_t *state, const uint8_t array[32]);
+
+int
+compact_encode_fixed32 (compact_state_t *state, const uint8_t array[32]);
 
 int
 compact_decode_fixed32 (compact_state_t *state, uint8_t result[32]);
 
 int
-compact_preencode_fixed64 (compact_state_t *state, const uint8_t buffer[64]);
+compact_preencode_fixed64 (compact_state_t *state, const uint8_t array[64]);
 
 int
-compact_encode_fixed64 (compact_state_t *state, const uint8_t buffer[64]);
+compact_encode_fixed64 (compact_state_t *state, const uint8_t array[64]);
 
 int
 compact_decode_fixed64 (compact_state_t *state, uint8_t result[64]);

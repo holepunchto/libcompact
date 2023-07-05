@@ -4,14 +4,14 @@
 #include "../include/compact.h"
 
 int
-compact_preencode_fixed32 (compact_state_t *state, const uint8_t buffer[32]) {
+compact_preencode_fixed32 (compact_state_t *state, const uint8_t array[32]) {
   state->end += 32;
   return 0;
 }
 
 int
-compact_encode_fixed32 (compact_state_t *state, const uint8_t buffer[32]) {
-  memcpy(&state->buffer[state->start], buffer, 32);
+compact_encode_fixed32 (compact_state_t *state, const uint8_t array[32]) {
+  memcpy(&state->buffer[state->start], array, 32);
   state->start += 32;
   return 0;
 }
