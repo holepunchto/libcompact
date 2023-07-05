@@ -41,7 +41,7 @@ compact_decode_array (compact_state_t *state, void **result, size_t *len, void *
   err = compact_decode_uint(state, &size);
   if (err < 0) return err;
 
-  void *array = on_alloc(size, data);
+  void *array = result ? on_alloc(size, data) : NULL;
 
   if (result) *result = array;
   if (len) *len = 0;
