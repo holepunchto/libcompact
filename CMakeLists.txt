@@ -48,7 +48,7 @@ target_include_directories(
     $<TARGET_PROPERTY:utf,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
-add_library(compact_shared SHARED $<TARGET_OBJECTS:compact>)
+add_library(compact_shared SHARED)
 
 set_target_properties(
   compact_shared
@@ -57,7 +57,13 @@ set_target_properties(
   WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 
-add_library(compact_static STATIC $<TARGET_OBJECTS:compact>)
+target_link_libraries(
+  compact_shared
+  PUBLIC
+    compact
+)
+
+add_library(compact_static STATIC)
 
 set_target_properties(
   compact_static
@@ -66,11 +72,18 @@ set_target_properties(
   PREFIX lib
 )
 
+target_link_libraries(
+  compact_static
+  PUBLIC
+    compact
+)
+
 install(TARGETS compact_shared compact_static)
 
 install(FILES include/compact.h DESTINATION include)
 
 if(PROJECT_IS_TOP_LEVEL)
   enable_testing()
+
   add_subdirectory(test)
 endif()

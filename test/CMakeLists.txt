@@ -23,12 +23,6 @@ foreach(test IN LISTS tests)
       compact_static
   )
 
-  target_include_directories(
-    ${test}
-    PRIVATE
-      $<TARGET_PROPERTY:compact,INTERFACE_INCLUDE_DIRECTORIES>
-  )
-
   add_test(
     NAME ${test}
     COMMAND ${test}
