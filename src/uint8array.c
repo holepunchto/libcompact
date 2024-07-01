@@ -1,6 +1,5 @@
 #include <stddef.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "../include/compact.h"
@@ -35,13 +34,7 @@ compact_decode_uint8array (compact_state_t *state, uint8_t **result, size_t *len
 
   if (state->end - state->start < size) return -1;
 
-  if (result) {
-    uint8_t *array = malloc(size);
-
-    memcpy(array, &state->buffer[state->start], size);
-
-    *result = array;
-  }
+  if (result) *result = &state->buffer[state->start];
 
   if (len) *len = size;
 

@@ -45,7 +45,12 @@ target_include_directories(
   compact
   PUBLIC
     include
-    $<TARGET_PROPERTY:utf,INTERFACE_INCLUDE_DIRECTORIES>
+)
+
+target_link_libraries(
+  compact
+  PUBLIC
+    utf
 )
 
 add_library(compact_shared SHARED)
@@ -61,6 +66,7 @@ target_link_libraries(
   compact_shared
   PUBLIC
     compact
+    utf_shared
 )
 
 add_library(compact_static STATIC)
@@ -76,6 +82,7 @@ target_link_libraries(
   compact_static
   PUBLIC
     compact
+    utf_static
 )
 
 install(TARGETS compact_shared compact_static)

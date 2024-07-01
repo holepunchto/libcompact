@@ -176,13 +176,13 @@ int
 compact_decode_fixed64 (compact_state_t *state, uint8_t result[64]);
 
 int
-compact_preencode_utf8 (compact_state_t *state, const utf8_t *string, size_t len);
+compact_preencode_utf8 (compact_state_t *state, const utf8_string_view_t string);
 
 int
-compact_encode_utf8 (compact_state_t *state, const utf8_t *string, size_t len);
+compact_encode_utf8 (compact_state_t *state, const utf8_string_view_t string);
 
 int
-compact_decode_utf8 (compact_state_t *state, utf8_t **result, size_t *len);
+compact_decode_utf8 (compact_state_t *state, utf8_string_view_t *result);
 
 int
 compact_preencode_array (compact_state_t *state, void *array, size_t len, void *data, compact_array_cb on_preencode);
