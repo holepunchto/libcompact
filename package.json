@@ -1,16 +1,16 @@
 {
   "private": true,
-  "name": "libhex",
+  "name": "libcompact",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/holepunchto/libhex.git"
+    "url": "git+https://github.com/holepunchto/libcompact.git"
   },
   "author": "Holepunch",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/holepunchto/libhex/issues"
+    "url": "https://github.com/holepunchto/libcompact/issues"
   },
-  "homepage": "https://github.com/holepunchto/libhex#readme",
+  "homepage": "https://github.com/holepunchto/libcompact#readme",
   "devDependencies": {
     "cmake-fetch": "^1.0.0"
   }
