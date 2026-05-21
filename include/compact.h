@@ -77,6 +77,15 @@ int
 compact_decode_uint64 (compact_state_t *state, uint64_t *result);
 
 int
+compact_preencode_uint64be (compact_state_t *state, uint64_t n);
+
+int
+compact_encode_uint64be (compact_state_t *state, uint64_t n);
+
+int
+compact_decode_uint64be (compact_state_t *state, uint64_t *result);
+
+int
 compact_preencode_int (compact_state_t *state, intmax_t n);
 
 int

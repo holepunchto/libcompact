@@ -35,3 +35,37 @@ compact_decode_uint64 (compact_state_t *state, uint64_t *result) {
 
   return 0;
 }
+
+int
+compact_preencode_uint64be (compact_state_t *state, uint64_t n) {
+  state->end += 8;
+
+  return 0;
+}
+
+int
+compact_encode_uint64be (compact_state_t *state, uint64_t n) {
+  state->buffer[state->start] = n >> 56;
+  state->buffer[state->start + 1] = n >> 48;
+  state->buffer[state->start + 2] = n >> 40;
+  state->buffer[state->start + 3] = n >> 32;
+  state->buffer[state->start + 4] = n >> 24;
+  state->buffer[state->start + 5] = n >> 16;
+  state->buffer[state->start + 6] = n >> 8;
+  state->buffer[state->start + 7] = n;
+
+  state->start += 8;
+
+  return 0;
+}
+
+int
+compact_decode_uint64be (compact_state_t *state, uint64_t *result) {
+  if (state->end - state->start < 8) return -1;
+
+  if (result) *result = ((uint64_t) state->buffer[state->start]) << 56 | ((uint64_t) state->buffer[state->start + 1] << 48) | ((uint64_t) state->buffer[state->start + 2] << 40) | ((uint64_t) state->buffer[state->start + 3] << 32) | ((uint64_t) state->buffer[state->start + 4] << 24) | ((uint64_t) state->buffer[state->start + 5] << 16) | ((uint64_t) state->buffer[state->start + 6] << 8) | ((uint64_t) state->buffer[state->start + 7]);
+
+  state->start += 8;
+
+  return 0;
+}
