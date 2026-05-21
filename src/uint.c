@@ -94,7 +94,7 @@ compact_encode_uintbe (compact_state_t *state, uintmax_t n) {
   assert(sizeof(uintmax_t) == 8);
 
   if (n <= 0xfc) {
-    return compact_encode_uint8be(state, n & 0xff);
+    return compact_encode_uint8(state, n & 0xff);
   }
 
   if (n <= 0xffff) {
@@ -121,7 +121,7 @@ compact_decode_uintbe (compact_state_t *state, uintmax_t *result) {
   int err;
 
   uint8_t uint8;
-  err = compact_decode_uint8be(state, &uint8);
+  err = compact_decode_uint8(state, &uint8);
   if (err < 0) return err;
 
   if (uint8 <= 0xfc) {
