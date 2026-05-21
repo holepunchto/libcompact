@@ -59,8 +59,9 @@
     assert(err == 0); \
 \
     assert(state.end == ref.end); \
-    for(int i = 0; i < state.end; i++) { \
-      assert(state.buffer[i] == ref.buffer[state.end - 1 - i]); \
+    assert(state.buffer[0] == ref.buffer[0]); \
+    for(int i = 1; i < state.end; i++) { \
+      assert(state.buffer[i] == ref.buffer[state.end - i]); \
     } \
   }
 
