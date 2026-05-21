@@ -30,3 +30,30 @@ compact_decode_int (compact_state_t *state, intmax_t *result) {
 
   return 0;
 }
+
+int
+compact_preencode_intbe (compact_state_t *state, intmax_t n) {
+  assert(sizeof(intmax_t) == 8);
+
+  return compact_preencode_uintbe(state, compact_encode_zig_zag(64, n));
+}
+
+int
+compact_encode_intbe (compact_state_t *state, intmax_t n) {
+  assert(sizeof(intmax_t) == 8);
+
+  return compact_encode_uintbe(state, compact_encode_zig_zag(64, n));
+}
+
+int
+compact_decode_intbe (compact_state_t *state, intmax_t *result) {
+  assert(sizeof(intmax_t) == 8);
+
+  uintmax_t n;
+  int err = compact_decode_uintbe(state, result ? &n : NULL);
+  if (err < 0) return err;
+
+  if (result) *result = compact_decode_zig_zag(64, n);
+
+  return 0;
+}
