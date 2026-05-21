@@ -60,7 +60,7 @@
 \
     assert(state.end == ref.end); \
     for(int i = 0; i < state.end; i++) { \
-      assert(state.buffer[i] == ref.buffer[i - state.end - 1]); \
+      assert(state.buffer[i] == ref.buffer[state.end - 1 - i]); \
     } \
   }
 
