@@ -59,6 +59,15 @@ int
 compact_decode_uint16 (compact_state_t *state, uint16_t *result);
 
 int
+compact_preencode_uint16be (compact_state_t *state, uint16_t n);
+
+int
+compact_encode_uint16be (compact_state_t *state, uint16_t n);
+
+int
+compact_decode_uint16be (compact_state_t *state, uint16_t *result);
+
+int
 compact_preencode_uint32 (compact_state_t *state, uint32_t n);
 
 int
@@ -66,6 +75,15 @@ compact_encode_uint32 (compact_state_t *state, uint32_t n);
 
 int
 compact_decode_uint32 (compact_state_t *state, uint32_t *result);
+
+int
+compact_preencode_uint32be (compact_state_t *state, uint32_t n);
+
+int
+compact_encode_uint32be (compact_state_t *state, uint32_t n);
+
+int
+compact_decode_uint32be (compact_state_t *state, uint32_t *result);
 
 int
 compact_preencode_uint64 (compact_state_t *state, uint64_t n);
