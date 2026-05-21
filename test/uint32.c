@@ -50,12 +50,12 @@
 \
     assert(n == decoded); \
 \
-    err = compact_preencode_uint32be(&ref, n); \
+    err = compact_preencode_uint32(&ref, n); \
     assert(err == 0); \
 \
     ref.buffer = malloc(ref.end); \
 \
-    err = compact_encode_uint32be(&ref, n); \
+    err = compact_encode_uint32(&ref, n); \
     assert(err == 0); \
 \
     for(int i = 0; i < 4; i++) { \
