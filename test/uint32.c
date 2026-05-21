@@ -59,7 +59,7 @@
     assert(err == 0); \
 \
     for(int i = 0; i < 4; i++) { \
-      assert(state.buffer[i] == ref.buffer[3-i]); \
+      assert(state.buffer[i] == ref.buffer[3 - i]); \
     } \
   }
 
