@@ -29,13 +29,21 @@ target_sources(
     src/int.c
     src/int8.c
     src/int16.c
+    src/int24.c
     src/int32.c
+    src/int40.c
+    src/int48.c
+    src/int56.c
     src/int64.c
     src/uint.c
     src/uint8.c
     src/uint8array.c
     src/uint16.c
+    src/uint24.c
     src/uint32.c
+    src/uint40.c
+    src/uint48.c
+    src/uint56.c
     src/uint64.c
     src/utf8.c
     src/zig-zag.h
