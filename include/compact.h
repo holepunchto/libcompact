@@ -113,6 +113,42 @@ int
 compact_decode_uint64be (compact_state_t *state, uint64_t *result);
 
 int
+compact_preencode_uint24 (compact_state_t *state, uint32_t n);
+
+int
+compact_encode_uint24 (compact_state_t *state, uint32_t n);
+
+int
+compact_decode_uint24 (compact_state_t *state, uint32_t *result);
+
+int
+compact_preencode_uint40 (compact_state_t *state, uint64_t n);
+
+int
+compact_encode_uint40 (compact_state_t *state, uint64_t n);
+
+int
+compact_decode_uint40 (compact_state_t *state, uint64_t *result);
+
+int
+compact_preencode_uint48 (compact_state_t *state, uint64_t n);
+
+int
+compact_encode_uint48 (compact_state_t *state, uint64_t n);
+
+int
+compact_decode_uint48 (compact_state_t *state, uint64_t *result);
+
+int
+compact_preencode_uint56 (compact_state_t *state, uint64_t n);
+
+int
+compact_encode_uint56 (compact_state_t *state, uint64_t n);
+
+int
+compact_decode_uint56 (compact_state_t *state, uint64_t *result);
+
+int
 compact_preencode_int (compact_state_t *state, intmax_t n);
 
 int
@@ -192,6 +228,42 @@ compact_encode_int64be (compact_state_t *state, int64_t n);
 
 int
 compact_decode_int64be (compact_state_t *state, int64_t *result);
+
+int
+compact_preencode_int24 (compact_state_t *state, int32_t n);
+
+int
+compact_encode_int24 (compact_state_t *state, int32_t n);
+
+int
+compact_decode_int24 (compact_state_t *state, int32_t *result);
+
+int
+compact_preencode_int40 (compact_state_t *state, int64_t n);
+
+int
+compact_encode_int40 (compact_state_t *state, int64_t n);
+
+int
+compact_decode_int40 (compact_state_t *state, int64_t *result);
+
+int
+compact_preencode_int48 (compact_state_t *state, int64_t n);
+
+int
+compact_encode_int48 (compact_state_t *state, int64_t n);
+
+int
+compact_decode_int48 (compact_state_t *state, int64_t *result);
+
+int
+compact_preencode_int56 (compact_state_t *state, int64_t n);
+
+int
+compact_encode_int56 (compact_state_t *state, int64_t n);
+
+int
+compact_decode_int56 (compact_state_t *state, int64_t *result);
 
 int
 compact_preencode_float32 (compact_state_t *state, float n);
