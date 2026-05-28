@@ -1,12 +1,9 @@
-#include <assert.h>
 #include <stdint.h>
 
 #include "../include/compact.h"
 
 int
-compact_preencode_uint (compact_state_t *state, uintmax_t n) {
-  assert(sizeof(uintmax_t) == 8);
-
+compact_preencode_uint (compact_state_t *state, uint64_t n) {
   state->end += n <= 0xfc         ? 1
                 : n <= 0xffff     ? 3
                 : n <= 0xffffffff ? 5
@@ -15,9 +12,7 @@ compact_preencode_uint (compact_state_t *state, uintmax_t n) {
 }
 
 int
-compact_encode_uint (compact_state_t *state, uintmax_t n) {
-  assert(sizeof(uintmax_t) == 8);
-
+compact_encode_uint (compact_state_t *state, uint64_t n) {
   if (n <= 0xfc) {
     return compact_encode_uint8(state, n & 0xff);
   }
@@ -40,9 +35,7 @@ compact_encode_uint (compact_state_t *state, uintmax_t n) {
 }
 
 int
-compact_decode_uint (compact_state_t *state, uintmax_t *result) {
-  assert(sizeof(uintmax_t) == 8);
-
+compact_decode_uint (compact_state_t *state, uint64_t *result) {
   int err;
 
   uint8_t uint8;
@@ -75,24 +68,19 @@ compact_decode_uint (compact_state_t *state, uintmax_t *result) {
     return 0;
   }
 
-  uint64_t uint64;
-  err = compact_decode_uint64(state, result ? &uint64 : NULL);
+  err = compact_decode_uint64(state, result);
   if (err < 0) return err;
-
-  if (result) *result = uint64;
 
   return 0;
 }
 
 int
-compact_preencode_uintbe (compact_state_t *state, uintmax_t n) {
+compact_preencode_uintbe (compact_state_t *state, uint64_t n) {
   return compact_preencode_uint(state, n);
 }
 
 int
-compact_encode_uintbe (compact_state_t *state, uintmax_t n) {
-  assert(sizeof(uintmax_t) == 8);
-
+compact_encode_uintbe (compact_state_t *state, uint64_t n) {
   if (n <= 0xfc) {
     return compact_encode_uint8(state, n & 0xff);
   }
@@ -115,9 +103,7 @@ compact_encode_uintbe (compact_state_t *state, uintmax_t n) {
 }
 
 int
-compact_decode_uintbe (compact_state_t *state, uintmax_t *result) {
-  assert(sizeof(uintmax_t) == 8);
-
+compact_decode_uintbe (compact_state_t *state, uint64_t *result) {
   int err;
 
   uint8_t uint8;
@@ -150,11 +136,8 @@ compact_decode_uintbe (compact_state_t *state, uintmax_t *result) {
     return 0;
   }
 
-  uint64_t uint64;
-  err = compact_decode_uint64be(state, result ? &uint64 : NULL);
+  err = compact_decode_uint64be(state, result);
   if (err < 0) return err;
-
-  if (result) *result = uint64;
 
   return 0;
 }

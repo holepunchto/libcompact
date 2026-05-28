@@ -28,7 +28,7 @@ compact_encode_utf8 (compact_state_t *state, const utf8_string_view_t string) {
 
 int
 compact_decode_utf8 (compact_state_t *state, utf8_string_view_t *result) {
-  uintmax_t len;
+  uint64_t len;
   int err = compact_decode_uint(state, &len);
   if (err < 0) return err;
 
