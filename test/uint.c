@@ -20,7 +20,7 @@
 \
     state.start = 0; \
 \
-    uintmax_t decoded; \
+    uint64_t decoded; \
     err = compact_decode_uint(&state, &decoded); \
     assert(err == 0); \
 \
@@ -44,7 +44,7 @@
 \
     state.start = 0; \
 \
-    uintmax_t decoded; \
+    uint64_t decoded; \
     err = compact_decode_uintbe(&state, &decoded); \
     assert(err == 0); \
 \

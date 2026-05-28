@@ -32,22 +32,22 @@ int
 compact_decode_bool (compact_state_t *state, bool *result);
 
 int
-compact_preencode_uint (compact_state_t *state, uintmax_t n);
+compact_preencode_uint (compact_state_t *state, uint64_t n);
 
 int
-compact_encode_uint (compact_state_t *state, uintmax_t n);
+compact_encode_uint (compact_state_t *state, uint64_t n);
 
 int
-compact_decode_uint (compact_state_t *state, uintmax_t *result);
+compact_decode_uint (compact_state_t *state, uint64_t *result);
 
 int
-compact_preencode_uintbe (compact_state_t *state, uintmax_t n);
+compact_preencode_uintbe (compact_state_t *state, uint64_t n);
 
 int
-compact_encode_uintbe (compact_state_t *state, uintmax_t n);
+compact_encode_uintbe (compact_state_t *state, uint64_t n);
 
 int
-compact_decode_uintbe (compact_state_t *state, uintmax_t *result);
+compact_decode_uintbe (compact_state_t *state, uint64_t *result);
 
 int
 compact_preencode_uint8 (compact_state_t *state, uint8_t n);
@@ -149,22 +149,22 @@ int
 compact_decode_uint56 (compact_state_t *state, uint64_t *result);
 
 int
-compact_preencode_int (compact_state_t *state, intmax_t n);
+compact_preencode_int (compact_state_t *state, int64_t n);
 
 int
-compact_encode_int (compact_state_t *state, intmax_t n);
+compact_encode_int (compact_state_t *state, int64_t n);
 
 int
-compact_decode_int (compact_state_t *state, intmax_t *result);
+compact_decode_int (compact_state_t *state, int64_t *result);
 
 int
-compact_preencode_intbe (compact_state_t *state, intmax_t n);
+compact_preencode_intbe (compact_state_t *state, int64_t n);
 
 int
-compact_encode_intbe (compact_state_t *state, intmax_t n);
+compact_encode_intbe (compact_state_t *state, int64_t n);
 
 int
-compact_decode_intbe (compact_state_t *state, intmax_t *result);
+compact_decode_intbe (compact_state_t *state, int64_t *result);
 
 int
 compact_preencode_int8 (compact_state_t *state, int8_t n);

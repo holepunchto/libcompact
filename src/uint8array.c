@@ -28,7 +28,7 @@ compact_encode_uint8array (compact_state_t *state, const uint8_t *array, size_t 
 
 int
 compact_decode_uint8array (compact_state_t *state, uint8_t **result, size_t *len) {
-  uintmax_t size;
+  uint64_t size;
   int err = compact_decode_uint(state, &size);
   if (err < 0) return err;
 
