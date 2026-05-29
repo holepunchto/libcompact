@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <string.h>
 
 #include "../include/compact.h"
 
@@ -11,16 +12,19 @@ compact_preencode_float32 (compact_state_t *state, float n) {
 
 int
 compact_encode_float32 (compact_state_t *state, float n) {
-  return compact_encode_uint32(state, (uint32_t) n);
+  uint32_t bits;
+  memcpy(&bits, &n, sizeof(bits));
+
+  return compact_encode_uint32(state, bits);
 }
 
 int
 compact_decode_float32 (compact_state_t *state, float *result) {
-  uint32_t n;
-  int err = compact_decode_uint32(state, result ? &n : NULL);
+  uint32_t bits;
+  int err = compact_decode_uint32(state, result ? &bits : NULL);
   if (err < 0) return err;
 
-  if (result) *result = (float) n;
+  if (result) memcpy(result, &bits, sizeof(*result));
 
   return 0;
 }
