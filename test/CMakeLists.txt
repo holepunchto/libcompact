@@ -2,6 +2,8 @@ list(APPEND tests
   array-utf8
   fixed32
   fixed64
+  float32
+  float64
   int
   int8
   int16
