@@ -1,4 +1,5 @@
 list(APPEND tests
+  array-oversized
   array-utf8
   fixed32
   fixed64
