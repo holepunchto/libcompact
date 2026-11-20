@@ -58,6 +58,14 @@ target_link_libraries(
     json_static
 )
 
+if(WIN32)
+  target_compile_definitions(
+    conformance
+    PRIVATE
+      _CRT_SECURE_NO_WARNINGS
+  )
+endif()
+
 add_test(
   NAME conformance
   COMMAND conformance
