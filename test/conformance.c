@@ -280,11 +280,12 @@ as_uint64 (const json_t *value, uint64_t *result) {
   if (value != NULL && json_is_number(value)) {
     double n = json_number_value(value);
 
-    if (isnan(n) || isinf(n) || n != floor(n) || n < 0 || n >= 0x1p64) return false;
+    if (isnan(n) || isinf(n) || n < 0 || n >= 0x1p64) return false;
 
     *result = (uint64_t) n;
 
-    return true;
+    // a fraction truncates, so the value is an integer only if it survives
+    return (double) *result == n;
   }
 
   if (wide(value, &digits)) {
@@ -311,11 +312,11 @@ as_int64 (const json_t *value, int64_t *result) {
   if (value != NULL && json_is_number(value)) {
     double n = json_number_value(value);
 
-    if (isnan(n) || isinf(n) || n != floor(n) || n < -0x1p63 || n >= 0x1p63) return false;
+    if (isnan(n) || isinf(n) || n < -0x1p63 || n >= 0x1p63) return false;
 
     *result = (int64_t) n;
 
-    return true;
+    return (double) *result == n;
   }
 
   if (wide(value, &digits)) {
