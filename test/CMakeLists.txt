@@ -46,3 +46,24 @@ foreach(test IN LISTS tests)
     TIMEOUT 30
   )
 endforeach()
+
+add_executable(conformance conformance.c)
+
+target_link_libraries(
+  conformance
+  PRIVATE
+    compact_static
+    json_static
+)
+
+add_test(
+  NAME conformance
+  COMMAND conformance
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+
+set_tests_properties(
+  conformance
+  PROPERTIES
+  TIMEOUT 30
+)

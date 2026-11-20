@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/holepunchto/libcompact#readme",
   "devDependencies": {
-    "cmake-fetch": "^1.0.0"
+    "cmake-fetch": "^1.0.0",
+    "compact-encoding-test": "^0.3.1"
   }
 }
