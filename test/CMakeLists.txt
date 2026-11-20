@@ -47,6 +47,8 @@ foreach(test IN LISTS tests)
   )
 endforeach()
 
+fetch_package("github:holepunchto/libjson")
+
 add_executable(conformance conformance.c)
 
 target_link_libraries(

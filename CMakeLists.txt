@@ -100,7 +100,5 @@ install(FILES include/compact.h DESTINATION include)
 if(PROJECT_IS_TOP_LEVEL)
   enable_testing()
 
-  fetch_package("github:holepunchto/libjson")
-
   add_subdirectory(test)
 endif()
