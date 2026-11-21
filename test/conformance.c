@@ -73,6 +73,45 @@ static size_t divergences_len;
 
 static json_t *unrepresentable_rules;
 
+// The divergences this library is known to produce. Each one is a finding
+// recorded in TODO.md, and anything outside this list fails the run.
+static const char *expected[] = {
+  // the corpus marks a wrong size unrepresentable from the release after 0.3.1
+  "fixed-32-wrong-size",
+  "fixed-64-wrong-size",
+  // utf8 decode hands back the bytes without substituting
+  "utf8-above-max-code-point",
+  "utf8-count-cuts-a-sequence-short",
+  "utf8-encoded-surrogate",
+  "utf8-invalid-bytes",
+  "utf8-overlong",
+  "utf8-overlong-four-byte",
+  "utf8-stranded-continuations",
+  "utf8-subpart-completable",
+  "utf8-subpart-uncompletable",
+  // libutf drops a surrogate that pairs with nothing
+  "utf8-unpaired-after-pair",
+  "utf8-unpaired-surrogate",
+};
+
+static bool
+diverged (const char *id) {
+  for (size_t i = 0; i < divergences_len; i++) {
+    if (strcmp(divergences[i].id, id) == 0) return true;
+  }
+
+  return false;
+}
+
+static bool
+is_expected (const char *id) {
+  for (size_t i = 0; i < sizeof(expected) / sizeof(const char *); i++) {
+    if (strcmp(expected[i], id) == 0) return true;
+  }
+
+  return false;
+}
+
 static void
 push (list_t *list, const char *value) {
   if (list->len == list->capacity) {
@@ -1202,6 +1241,29 @@ print_summary (void) {
   printf("\n%zu codecs the corpus has no cases for\n", uncovered.len);
 }
 
+// A case that stops diverging is reported rather than failed, so that a fix
+// landing upstream does not turn the build red on its way in.
+static size_t
+print_gate (void) {
+  size_t count = 0;
+
+  for (size_t i = 0; i < divergences_len; i++) {
+    if (is_expected(divergences[i].id)) continue;
+
+    printf("UNEXPECTED %s\n", divergences[i].id);
+
+    count++;
+  }
+
+  for (size_t i = 0; i < sizeof(expected) / sizeof(const char *); i++) {
+    if (diverged(expected[i])) continue;
+
+    printf("RESOLVED %s, drop it from the expected list\n", expected[i]);
+  }
+
+  return count;
+}
+
 int
 main (int argc, char *argv[]) {
   bool as_json = false;
@@ -1237,5 +1299,5 @@ main (int argc, char *argv[]) {
   if (as_json) print_report(corpus);
   else print_summary();
 
-  return 0;
+  return print_gate() == 0 ? 0 : 1;
 }
