@@ -358,6 +358,16 @@ as_double (const json_t *value, double *result) {
 }
 
 static bool
+nibble (char digit, uint8_t *result) {
+  if (digit >= '0' && digit <= '9') *result = digit - '0';
+  else if (digit >= 'a' && digit <= 'f') *result = digit - 'a' + 10;
+  else if (digit >= 'A' && digit <= 'F') *result = digit - 'A' + 10;
+  else return false;
+
+  return true;
+}
+
+static bool
 as_bytes (const json_t *value, uint8_t **result, size_t *len) {
   const char *digits = text(value);
 
@@ -371,11 +381,11 @@ as_bytes (const json_t *value, uint8_t **result, size_t *len) {
   *result = malloc(*len + 1);
 
   for (size_t i = 0; i < *len; i++) {
-    unsigned byte;
+    uint8_t high, low;
 
-    if (sscanf(&digits[i * 2], "%2x", &byte) != 1) return false;
+    if (!nibble(digits[i * 2], &high) || !nibble(digits[i * 2 + 1], &low)) return false;
 
-    (*result)[i] = (uint8_t) byte;
+    (*result)[i] = (uint8_t) (high << 4 | low);
   }
 
   return true;
