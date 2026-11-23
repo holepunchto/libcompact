@@ -89,9 +89,6 @@ static const char *expected[] = {
   "utf8-stranded-continuations",
   "utf8-subpart-completable",
   "utf8-subpart-uncompletable",
-  // libutf drops a surrogate that pairs with nothing
-  "utf8-unpaired-after-pair",
-  "utf8-unpaired-surrogate",
 };
 
 static bool
