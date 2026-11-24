@@ -254,42 +254,6 @@ notation_boolean (bool value) {
   return result;
 }
 
-static bool
-notation_equal (const json_t *a, const json_t *b) {
-  if (a == NULL || b == NULL) return a == b;
-
-  if (json_typeof(a) != json_typeof(b)) return false;
-
-  switch (json_typeof(a)) {
-  case json_boolean:
-    return json_boolean_value(a) == json_boolean_value(b);
-
-  case json_number:
-    return json_number_value(a) == json_number_value(b);
-
-  case json_string:
-    return strcmp(text(a), text(b)) == 0;
-
-  case json_array: {
-    size_t len = json_array_size(a);
-
-    if (len != json_array_size(b)) return false;
-
-    for (size_t i = 0; i < len; i++) {
-      if (!notation_equal(json_array_get(a, i), json_array_get(b, i))) return false;
-    }
-
-    return true;
-  }
-
-  case json_null:
-    return true;
-
-  default:
-    return false;
-  }
-}
-
 /**
  * Reading a value out of the notation and into a type this library carries
  */
@@ -901,7 +865,9 @@ answer_equal (const answer_t *a, const answer_t *b) {
     if ((a->bits == NULL) != (b->bits == NULL)) return false;
     if (a->bits != NULL && (a->bits_len != b->bits_len || memcmp(a->bits, b->bits, a->bits_len) != 0)) return false;
 
-    return notation_equal(a->decodes, b->decodes);
+    if (a->decodes == NULL || b->decodes == NULL) return a->decodes == b->decodes;
+
+    return json_equal(a->decodes, b->decodes);
 
   default:
     return true;
