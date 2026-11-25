@@ -79,7 +79,8 @@ static const char *expected[] = {
   // the corpus marks a wrong size unrepresentable from the release after 0.3.1
   "fixed-32-wrong-size",
   "fixed-64-wrong-size",
-  // utf8 decode hands back the bytes without substituting
+  // utf8 decode borrows the bytes by design, so these stay: the substituting
+  // answer is compact_decode_utf8_with_replacement, which the corpus does not ask
   "utf8-above-max-code-point",
   "utf8-count-cuts-a-sequence-short",
   "utf8-encoded-surrogate",
