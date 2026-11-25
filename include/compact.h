@@ -316,6 +316,8 @@ compact_preencode_utf8 (compact_state_t *state, const utf8_string_view_t string)
 int
 compact_encode_utf8 (compact_state_t *state, const utf8_string_view_t string);
 
+// The view borrows from the decode buffer and is not validated: its bytes are
+// whatever the input carried, well formed UTF-8 or not.
 int
 compact_decode_utf8 (compact_state_t *state, utf8_string_view_t *result);
 
