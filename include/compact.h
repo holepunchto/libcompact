@@ -321,6 +321,12 @@ compact_encode_utf8 (compact_state_t *state, const utf8_string_view_t string);
 int
 compact_decode_utf8 (compact_state_t *state, utf8_string_view_t *result);
 
+// Decode a UTF-8 string with ill-formed sequences replaced by U+FFFD. The
+// result is owned rather than borrowed, so the caller initialises it with
+// utf8_string_init() and frees it with utf8_string_destroy().
+int
+compact_decode_utf8_with_replacement (compact_state_t *state, utf8_string_t *result);
+
 int
 compact_preencode_array (compact_state_t *state, void *array, size_t len, void *data, compact_array_cb on_preencode);
 

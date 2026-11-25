@@ -46,6 +46,7 @@ target_sources(
     src/uint56.c
     src/uint64.c
     src/utf8.c
+    src/utf8-with-replacement.c
     src/zig-zag.h
 )
 
