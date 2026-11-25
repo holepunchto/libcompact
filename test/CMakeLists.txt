@@ -23,6 +23,7 @@ list(APPEND tests
   uint48
   uint56
   uint64
+  utf8-with-replacement
 )
 
 foreach(test IN LISTS tests)
