@@ -19,12 +19,12 @@ compact_decode_utf8_with_replacement (compact_state_t *state, utf8_string_view_t
 
   const utf8_t *bytes = &state->buffer[state->start];
 
-  size_t size = utf8_length_from_utf8_with_replacement(bytes, len);
+  size_t size = utf8_length_with_replacement(bytes, len);
 
   utf8_t *replaced = (utf8_t *) on_alloc(size, data);
   if (replaced == NULL) return -1;
 
-  utf8_convert_to_utf8_with_replacement(bytes, len, replaced);
+  utf8_with_replacement(bytes, len, replaced);
 
   *result = utf8_string_view_init(replaced, size);
 
