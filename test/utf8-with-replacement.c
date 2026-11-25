@@ -38,7 +38,7 @@ main () {
   // Well formed input comes back unchanged, in its own memory
   uint8_t well_formed[] = {0x03, 0x61, 0x62, 0x63};
 
-  state = (compact_state_t) {0, sizeof(well_formed), well_formed};
+  state = (compact_state_t){0, sizeof(well_formed), well_formed};
 
   utf8_string_t copied;
   utf8_string_init(&copied);
@@ -55,7 +55,7 @@ main () {
   // A count past the end of the input is rejected
   uint8_t truncated[] = {0x05, 0x61};
 
-  state = (compact_state_t) {0, sizeof(truncated), truncated};
+  state = (compact_state_t){0, sizeof(truncated), truncated};
 
   utf8_string_t unused;
   utf8_string_init(&unused);
