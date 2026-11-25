@@ -4,29 +4,25 @@
 #include "../include/compact.h"
 
 int
-compact_decode_utf8_with_replacement (compact_state_t *state, utf8_string_view_t *result, void *data, compact_alloc_cb on_alloc) {
+compact_decode_utf8_with_replacement (compact_state_t *state, utf8_string_t *result) {
   uint64_t len;
   int err = compact_decode_uint(state, &len);
   if (err < 0) return err;
 
   if (state->end - state->start < len) return -1;
 
-  if (result == NULL) {
-    state->start += len;
+  if (result) {
+    const utf8_t *bytes = &state->buffer[state->start];
 
-    return 0;
+    size_t size = utf8_length_with_replacement(bytes, len);
+
+    err = utf8_string_reserve(result, size);
+    if (err < 0) return err;
+
+    utf8_with_replacement(bytes, len, result->data);
+
+    result->len = size;
   }
-
-  const utf8_t *bytes = &state->buffer[state->start];
-
-  size_t size = utf8_length_with_replacement(bytes, len);
-
-  utf8_t *replaced = (utf8_t *) on_alloc(size, data);
-  if (replaced == NULL) return -1;
-
-  utf8_with_replacement(bytes, len, replaced);
-
-  *result = utf8_string_view_init(replaced, size);
 
   state->start += len;
 
