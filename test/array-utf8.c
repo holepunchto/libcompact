@@ -19,11 +19,16 @@ on_encode (compact_state_t *state, void *array, size_t i, void *data) {
   return compact_encode_utf8(state, strings[i]);
 }
 
+void *
+on_alloc_utf8 (size_t len, void *data) {
+  return malloc(len);
+}
+
 int
 on_decode (compact_state_t *state, void *array, size_t i, void *data) {
   utf8_string_view_t *strings = (utf8_string_view_t *) array;
 
-  return compact_decode_utf8(state, &strings[i]);
+  return compact_decode_utf8(state, &strings[i], data, on_alloc_utf8);
 }
 
 void *

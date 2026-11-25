@@ -705,13 +705,18 @@ encode_utf8 (json_t *value, answer_t *given) {
   encode_with(utf8, view)
 }
 
+static void *
+on_alloc_utf8 (size_t len, void *data) {
+  return malloc(len);
+}
+
 static void
 decode_utf8 (const uint8_t *bytes, size_t len, answer_t *given) {
   utf8_string_view_t view;
 
   compact_state_t state = {0, len, (uint8_t *) bytes};
 
-  if (compact_decode_utf8(&state, &view) < 0) return rejected(given);
+  if (compact_decode_utf8(&state, &view, NULL, on_alloc_utf8) < 0) return rejected(given);
 
   utf8_t *data = malloc(view.len + 1);
   memcpy(data, view.data, view.len);
