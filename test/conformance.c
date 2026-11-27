@@ -79,17 +79,6 @@ static const char *expected[] = {
   // the corpus marks a wrong size unrepresentable from the release after 0.3.1
   "fixed-32-wrong-size",
   "fixed-64-wrong-size",
-  // utf8 decode borrows the bytes by design, so these stay: the substituting
-  // answer is compact_decode_utf8_with_replacement, which the corpus does not ask
-  "utf8-above-max-code-point",
-  "utf8-count-cuts-a-sequence-short",
-  "utf8-encoded-surrogate",
-  "utf8-invalid-bytes",
-  "utf8-overlong",
-  "utf8-overlong-four-byte",
-  "utf8-stranded-continuations",
-  "utf8-subpart-completable",
-  "utf8-subpart-uncompletable",
 };
 
 static bool
@@ -669,15 +658,22 @@ encode_utf8 (json_t *value, answer_t *given) {
 
 static void
 decode_utf8 (const uint8_t *bytes, size_t len, answer_t *given) {
-  utf8_string_view_t view;
+  utf8_string_t result;
+  utf8_string_init(&result);
 
   compact_state_t state = {0, len, (uint8_t *) bytes};
 
-  if (compact_decode_utf8(&state, &view) < 0) return rejected(given);
+  if (compact_decode_utf8_with_replacement(&state, &result) < 0) {
+    utf8_string_destroy(&result);
 
-  utf8_t *data = malloc(view.len + 1);
-  memcpy(data, view.data, view.len);
-  data[view.len] = '\0';
+    return rejected(given);
+  }
+
+  utf8_t *data = malloc(result.len + 1);
+  memcpy(data, result.data, result.len);
+  data[result.len] = '\0';
+
+  utf8_string_destroy(&result);
 
   decoded(given, string((const char *) data), state.start);
 }
